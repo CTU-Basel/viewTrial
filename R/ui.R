@@ -1,4 +1,6 @@
-#' The application User-Interface
+#' Main user-interface (UI) function for viewTrial
+#'
+#' General appearance, header, sidebar and menu
 #'
 #' @import lubridate
 #' @import shiny
@@ -7,8 +9,6 @@
 #' @noRd
 
 app_ui <- function() {
-
-
 
     data <- get_data()
     ## Import module label ids
@@ -20,14 +20,17 @@ app_ui <- function() {
       dashboardPage(skin = "blue"
 
                     ## Header
-                    , dashboardHeader(title = paste0("Study as of ",
-                                                   data$data.extraction.date
-                                                   ), titleWidth = 300)
+                    , dashboardHeader(title = paste0("Study as of "
+                                                   , data$data.extraction.date
+                                                   )
+                                      , titleWidth = 300)
 
                     ## Sidebar
                     , dashboardSidebar(
-
-                      tags$head(tags$style(HTML('.logo {
+                      
+                      ## To change the dashboard background color to mint (DKF official color)
+                      tags$head(
+                        tags$style(HTML('.logo {
                               background-color: #1ea5a5 !important;
 
                               }
@@ -61,7 +64,8 @@ app_ui <- function() {
                                  , menuItem("Safety management", startExpanded = TRUE, icon = icon("notes-medical")
                                           , menuItem("Serious adverse events", tabName = mod$sae)))
                         
-                        , menuItem("Contacts", tabName = mod$contacts, icon = icon("home"))
+                        ## Add new tab here
+                        # , menuItem("FILL tab name", tabName = FILL module alias eg mod$xxxxxx, icon = icon("FILL"))
 
                         ## Date range filter
                         , dateRangeInput("period", "Randomization date:"
@@ -76,8 +80,6 @@ app_ui <- function() {
                     dashboardBody(
 
                       tabItems(
-
-                        ## Recruitment tab
                           mod_home_ui(mod$home, label = mod$home)
                         , mod_recruitment_ui(mod$recruit, label = mod$recruit)
                         , mod_retention_ui(mod$retention, label = mod$retention)
