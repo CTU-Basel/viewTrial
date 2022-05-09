@@ -1,0 +1,24 @@
+Package: viewTrial
+Type: Package
+Title: Centralized monitoring RShiny template
+Version: 0.1.0
+Author: Who wrote it
+Maintainer: The package maintainer <yourself@somewhere.net>
+Description: More about what it does (maybe more than one line)
+    Use four spaces when indenting paragraphs within the Description.
+License: CC BY 4.0
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.1.2
+Imports:
+    accrualPlot,
+    ggplot2,
+    lubridate,
+    magrittr,
+    plotly,
+    shiny,
+    shinydashboard
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
