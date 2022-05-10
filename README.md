@@ -5,6 +5,9 @@
 
 `viewTrial` provides a template R shiny web application that can be used for centralized monitoring in clinical trials and research. 
 
+## To use the template
+You could clone this repository to your local machine to copy the template code. 
+
 ## Structure of the app
 
 The app has been developed in a modular fashion as an R-package in which each module represents a tab in the sidemenu. 
