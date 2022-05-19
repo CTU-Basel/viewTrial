@@ -33,6 +33,17 @@ mod_queries_ui <- function(id, label){
               selected = "Status of all queries",
               tabPanel("Status of all queries", plotOutput(ns('querystatusplot'), height = "550"))
             )
+          ),
+          
+          fluidRow(
+            tabBox(
+              width = 12,
+              title = "List of queries",
+              id = "tabset2", height = "300px",
+              selected = "Answered queries",
+              tabPanel("Answered queries",  DT::DTOutput(ns("ansquerytable"))),
+              tabPanel("Open queries",  DT::DTOutput(ns("openquerytable")))
+            )
           )
   )
 }
@@ -42,6 +53,8 @@ mod_queries_ui <- function(id, label){
 #' @noRd 
 mod_queries_server <- function(input, output, session, data){
  
+  link <- get_links()
+  
   ## Generate list of queries
   ls.queries <- reactive({
   
@@ -117,6 +130,36 @@ mod_queries_server <- function(input, output, session, data){
                     ylim = c(0,110))
 
   })
+  
+  output$ansquerytable <- renderDT({
+    
+    df <- ls.queries() %>%
+      filter(Visit == input$visit) %>% 
+      ## Get only answered queries
+      filter(querystatus == "answered") %>% 
+      mutate(link = paste0(links$secuTrial,  "}"),
+             link = str_replace_all(link, c("\\\\href\\{" = "", "\\}" = "")),
+             link = createLink(link)) %>%
+      arrange(centre.short) %>% 
+      ungroup() %>% 
+      dplyr::select("Center" = centre.short, Visit, "Query status" = querystatus, "Link to secuTrial" = link) 
+    
+  }, escape = FALSE)
+  
+  output$openquerytable <- renderDT({
+    
+    df <- ls.queries() %>%
+      filter(Visit == input$visit) %>% 
+      ## Get only open queries
+      filter(querystatus == "open") %>% 
+      mutate(link = paste0(links$secuTrial,  "}"),
+             link = str_replace_all(link, c("\\\\href\\{" = "", "\\}" = "")),
+             link = createLink(link)) %>%
+      arrange(centre.short) %>% 
+      ungroup() %>% 
+      dplyr::select("Center" = centre.short, Visit, "Query status" = querystatus, "Link to secuTrial" = link) 
+    
+  }, escape = FALSE)
 
 }
 
