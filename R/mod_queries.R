@@ -53,7 +53,7 @@ mod_queries_ui <- function(id, label){
 #' @noRd 
 mod_queries_server <- function(input, output, session, data){
  
-  link <- get_links()
+  links <- get_links()
   
   ## Generate list of queries
   ls.queries <- reactive({
