@@ -63,9 +63,4 @@ file.copy("R/mod_skeleton.R", "R/mod_home.R")
 
 6. Add the line `callModule(mod_home_server, mod$home)` to R/server.R within app_server().
 
-## References
-
-
-
-## Acknowledgements
 
