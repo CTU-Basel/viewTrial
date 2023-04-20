@@ -4,6 +4,7 @@
 # viewTrial
 
 `viewTrial` provides a template R shiny web application that can be used for centralized monitoring in clinical trials and research. 
+[![](https://img.shields.io/badge/DOI-10.1186/s12874--023--01902--y-blue.svg)](https://bmcmedresmethodol.biomedcentral.com/articles/10.1186/s12874-023-01902-y)
 
 ## To use the template
 You could clone this repository to your local machine to copy the template code. 
